@@ -35,7 +35,7 @@ Attachments are completely downloaded and full text indexed.
 
 Comments can contain nested comments, they are indexed as a single comment item (comment + nested comments).
 
-** Only Posts supports incremental indexing **
+** Only Posts supports incremental indexing, be-aware of the duplicate entries in `RefreshEndpoints` **
 
 ### Folding
 For Posts with Comments & Attachments folding is enabled.
