@@ -11,7 +11,7 @@ To fully understand how to use this example, you must:
 
 ## Instructions
 1. [Create a Custom Integration into Workplace by Facebook](https://developers.facebook.com/docs/workplace/custom-integrations-new/).
-2. Make sure the Integration has the following access: Read group content, Read user timeline, Read user email, Read group membership, Read all messages, Create link previews, Read work profile, Manage Knowledge Library content.
+2. Make sure the Integration has the following access: Read group content, Read user timeline, Read user email, Read group membership, Read all messages, Read work profile, Read Knowledge Library content.
 3. Use the `Access Token` as `API Key` in your Generic Rest configuration.
 4. [Create 2 Generic REST API Sources](https://docs.coveo.com/en/1896/). One for the content which supports incremental indexing, one for the content which does not support incremental indexing. 
 5. Use in both sources the security setup in [SecurityConfig.json](https://github.com/coveooss/connectivity-library/blob/master/WorkplaceByFacebook/index/SecurityConfig.json). 
@@ -38,6 +38,12 @@ Attachments are completely downloaded and full text indexed.
 Comments can contain nested comments, they are indexed as a single comment item (comment + nested comments).
 
 ** Only Posts supports incremental indexing, be-aware of the duplicate entries in `RefreshEndpoints` **
+
+### Deleted items
+For the `NormalConfig` a normal refresh schedule is setup, so that will make sure that deleted Groups etc are being removed from the index.
+
+For the `IncrementalConfig`: problem is that Facebook does not store the deleted posts, it simply removes them. Even worse, the `since` operator we are using is not reporting any changes on deletes.
+The same applies for `comments`. The only way to remove `old` content, is to rebuild the source once a day.
 
 ### Folding
 For Posts with Comments & Attachments folding is enabled.

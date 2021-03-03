@@ -121,7 +121,8 @@
                     "Condition": "NOT %[message]"
                   },
                   "ModifiedDate": "%[created_time]",
-                  "Body": "%[comments.data[*].message]",
+                  "Body": "<html><body>%[message] %[comments.data[*].message]</body></html>",
+                  "IsBinaryBody": "true",
                   "Metadata": {
                     "id": "%[id]",
                     "coveo_foldingchild": "%[id]",
